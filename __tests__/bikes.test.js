@@ -48,4 +48,14 @@ describe('Hand-of-Resources routes', () => {
     const res = await request(app).get('/api/v1/bikes');
     expect(res.body).toEqual(expected);
   });
+
+  it('deletes a bike by id', async () => {
+    const bike = await Bike.insert({
+      manufacturer: 'Haro',
+      model: 'Yellow Bike',
+      frameSize: 17,
+    });
+    const res = await request(app).delete(`/api/v1/bikes/${bike.id}`);
+    expect(res.body).toEqual(bike);
+  });
 });
