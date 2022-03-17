@@ -11,4 +11,14 @@ describe('Hand-of-Resources routes', () => {
   afterAll(() => {
     pool.end();
   });
+
+  it('creates a bike', async () => {
+    const expected = {
+      manufacturer: 'Federal',
+      model: 'Shadow',
+      frameSize: 26,
+    };
+    const res = await request(app).post('/api/v1/bikes').send(expected);
+    expect(res.body).toEqual({ id: expect.any(String), ...expected });
+  });
 });
