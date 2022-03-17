@@ -32,4 +32,20 @@ describe('Hand-of-Resources routes', () => {
     const res = await request(app).get(`/api/v1/bikes/${bike.id}`);
     expect(res.body).toEqual(bike);
   });
+
+  it('gets an array of bikes', async () => {
+    await Bike.insert({
+      manufacturer: 'Honda',
+      model: 'CB360',
+      frameSize: 33,
+    });
+    await Bike.insert({
+      manufacturer: 'Yamaha',
+      model: 'XS650',
+      frameSize: 39,
+    });
+    const expected = await Bike.findAll();
+    const res = await request(app).get('/api/v1/bikes');
+    expect(res.body).toEqual(expected);
+  });
 });
