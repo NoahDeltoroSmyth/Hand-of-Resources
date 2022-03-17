@@ -58,4 +58,16 @@ describe('Hand-of-Resources routes', () => {
     const res = await request(app).delete(`/api/v1/bikes/${bike.id}`);
     expect(res.body).toEqual(bike);
   });
+
+  it('updates a bike by id', async () => {
+    const bike = await Bike.insert({
+      manufacturer: 'Schwinn',
+      model: 'Cruiser',
+      frameSize: 28,
+    });
+    const res = await request(app)
+      .patch(`/api/v1/bikes/${bike.id}`)
+      .send({ frameSize: 31 });
+    expect(res.body).toEqual({ ...bike, frameSize: 31 });
+  });
 });
