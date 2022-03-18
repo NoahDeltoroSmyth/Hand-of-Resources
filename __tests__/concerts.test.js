@@ -48,4 +48,14 @@ describe('Hand-of-Resources routes', () => {
     const res = await request(app).get('/api/v1/concerts');
     expect(res.body).toEqual(concerts);
   });
+
+  it('deletes a concert', async () => {
+    const concert = await Concert.insert({
+      venue: 'Goodwill',
+      band: 'Limp Bizkit',
+      date: '3/20/2022',
+    });
+    const res = await request(app).delete(`/api/v1/concerts/${concert.id}`);
+    expect(res.body).toEqual(concert);
+  });
 });
