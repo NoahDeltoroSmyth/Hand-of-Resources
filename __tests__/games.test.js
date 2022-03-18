@@ -32,4 +32,20 @@ describe('Hand-of-Resources routes', () => {
     const res = await request(app).get(`/api/v1/games/${game.id}`);
     expect(res.body).toEqual(game);
   });
+
+  it('finds all games', async () => {
+    await Game.insert({
+      title: 'monopoly',
+      genre: 'board game',
+      price: 5000,
+    });
+    await Game.insert({
+      title: 'Clue',
+      genre: 'Mystery',
+      price: 12,
+    });
+    const expected = await Game.findAll();
+    const res = await request(app).get('/api/v1/games');
+    expect(res.body).toEqual(expected);
+  });
 });
