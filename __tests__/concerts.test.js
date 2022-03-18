@@ -57,5 +57,6 @@ describe('Hand-of-Resources routes', () => {
     });
     const res = await request(app).delete(`/api/v1/concerts/${concert.id}`);
     expect(res.body).toEqual(concert);
+    console.log('res.body', res.body);
   });
 });
