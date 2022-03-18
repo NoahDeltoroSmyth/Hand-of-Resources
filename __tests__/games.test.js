@@ -19,6 +19,8 @@ describe('Hand-of-Resources routes', () => {
       price: 1000,
     };
     const res = await request(app).post('/api/v1/games').send(game);
-    expect(res.body).toEqual(game);
+    expect(res.body).toEqual({ id: expect.any(String), ...game });
   });
+
+  // it('');
 });
