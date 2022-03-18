@@ -16,7 +16,7 @@ describe('Hand-of-Resources routes', () => {
     const concert = {
       venue: 'Hawthorne Theatre',
       band: 'Yung Gravy',
-      date: '2020-03-05',
+      date: '2020-03-05T08:00:00.000Z',
     };
     const res = await request(app).post('/api/v1/concerts').send(concert);
     expect(res.body).toEqual({ id: expect.any(String), ...concert });
