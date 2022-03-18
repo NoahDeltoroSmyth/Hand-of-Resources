@@ -17,7 +17,7 @@ describe('Hand-of-Resources routes', () => {
     const concert = {
       venue: 'Hawthorne Theatre',
       band: 'Yung Gravy',
-      date: '2020-03-05',
+      date: '3/5/2020',
     };
     const res = await request(app).post('/api/v1/concerts').send(concert);
     expect(res.body).toEqual({ id: expect.any(String), ...concert });
@@ -31,6 +31,21 @@ describe('Hand-of-Resources routes', () => {
     });
     const res = await request(app).get(`/api/v1/concerts/${concert.id}`);
     expect(res.body).toEqual(concert);
-    console.log('res.body', res.body);
+  });
+
+  it('gets an array of concerts', async () => {
+    await Concert.insert({
+      venue: 'Fred Meyer',
+      band: 'disco bots',
+      date: '2020-02-10',
+    });
+    await Concert.insert({
+      venue: 'Safeway',
+      band: 'the wiggles',
+      date: '2020-02-10',
+    });
+    const concerts = await Concert.findAll();
+    const res = await request(app).get('/api/v1/concerts');
+    expect(res.body).toEqual(concerts);
   });
 });

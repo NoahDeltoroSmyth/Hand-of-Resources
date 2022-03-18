@@ -18,7 +18,7 @@ CREATE TABLE concerts (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     venue TEXT NOT NULL,
     band TEXT NOT NULL,
-    date TEXT NOT NULL
+    date DATE
 );
 
 CREATE TABLE games (
