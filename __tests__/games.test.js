@@ -11,4 +11,14 @@ describe('Hand-of-Resources routes', () => {
   afterAll(() => {
     pool.end();
   });
+
+  it('creates a game', async () => {
+    const game = {
+      title: 'star wars battlefront',
+      genre: 'shooter',
+      price: 1000,
+    };
+    const res = await request(app).post('/api/v1/games').send(game);
+    expect(res.body).toEqual(game);
+  });
 });
