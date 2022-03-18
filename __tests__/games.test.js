@@ -48,4 +48,14 @@ describe('Hand-of-Resources routes', () => {
     const res = await request(app).get('/api/v1/games');
     expect(res.body).toEqual(expected);
   });
+
+  it('deletes a game', async () => {
+    const game = await Game.insert({
+      title: 'Crash Bandicoot',
+      genre: 'family fun',
+      price: 2000,
+    });
+    const res = await request(app).delete(`/api/v1/games/${game.id}`);
+    expect(res.body).toEqual(game);
+  });
 });
