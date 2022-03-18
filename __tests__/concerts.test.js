@@ -57,6 +57,17 @@ describe('Hand-of-Resources routes', () => {
     });
     const res = await request(app).delete(`/api/v1/concerts/${concert.id}`);
     expect(res.body).toEqual(concert);
-    console.log('res.body', res.body);
+  });
+
+  it('updates a concert', async () => {
+    const concert = await Concert.insert({
+      venue: 'Plaid Pantry',
+      band: 'Oasis',
+      date: '3/26/2049',
+    });
+    const res = await request(app)
+      .patch(`/api/v1/concerts/${concert.id}`)
+      .send({ band: 'RHCP' });
+    expect(res.body).toEqual({ ...concert, band: 'RHCP' });
   });
 });
