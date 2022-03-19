@@ -48,4 +48,16 @@ describe('Hand-of-Resources routes', () => {
     const res = await request(app).get('/api/v1/guitars');
     expect(res.body).toEqual(guitars);
   });
+
+  it('updates a guitar by id', async () => {
+    const guitar = await Guitar.insert({
+      manufacturer: 'martin',
+      color: 'brown',
+      stringCount: 12,
+    });
+    const res = await request(app)
+      .patch(`/api/v1/guitars/${guitar.id}`)
+      .send({ stringCount: 6 });
+    expect(res.body).toEqual({ ...guitar, stringCount: 6 });
+  });
 });
