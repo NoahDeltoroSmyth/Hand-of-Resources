@@ -31,6 +31,22 @@ describe('Hand-of-Resources routes', () => {
     });
     const res = await request(app).get(`/api/v1/restaurants/${restaurant.id}`);
     expect(res.body).toEqual(restaurant);
+  });
+
+  it('responds with an array of restaurants', async () => {
+    await Restaurant.insert({
+      name: 'Ihop',
+      openAt: '04:00:00',
+      closeAt: '23:00:00',
+    });
+    await Restaurant.insert({
+      name: 'Muchas Gracias',
+      openAt: '02:00:00',
+      closeAt: '22:00:00',
+    });
+    const restaurants = await Restaurant.findAll();
+    const res = await request(app).get('/api/v1/restaurants');
+    expect(res.body).toEqual(restaurants);
     console.log('res.body', res.body);
   });
 });
