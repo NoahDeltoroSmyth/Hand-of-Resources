@@ -19,7 +19,7 @@ describe('Hand-of-Resources routes', () => {
       closeAt: '20:00:00',
     };
     const res = await request(app).post('/api/v1/restaurants').send(restaurant);
-    expect(res.body).toEqual(restaurant);
+    expect(res.body).toEqual({ id: expect.any(String), ...restaurant });
     console.log('res.body', res.body);
   });
 });
