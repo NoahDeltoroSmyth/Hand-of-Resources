@@ -61,4 +61,16 @@ describe('Hand-of-Resources routes', () => {
     expect(res.body).toEqual({ ...restaurant, name: 'King Burrito' });
     console.log('res.body', res.body);
   });
+
+  it('deletes a restaurant', async () => {
+    const restaurant = await Restaurant.insert({
+      name: 'Deli',
+      openAt: '09:00:00',
+      closeAt: '22:00:00',
+    });
+    const res = await request(app).delete(
+      `/api/v1/restaurants/${restaurant.id}`
+    );
+    expect(res.body).toEqual(restaurant);
+  });
 });
