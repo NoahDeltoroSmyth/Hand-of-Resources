@@ -38,7 +38,6 @@ CREATE TABLE guitars (
 CREATE TABLE restaurants (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name TEXT NOT NULL,
-    location TEXT NOT NULL,
     open_at TIME NOT NULL,
     close_at TIME NOT NULL
 );

@@ -11,4 +11,15 @@ describe('Hand-of-Resources routes', () => {
   afterAll(() => {
     pool.end();
   });
+
+  it('creates a new restaurant', async () => {
+    const restaurant = {
+      name: 'Izzys',
+      openAt: '08:00:00',
+      closeAt: '20:00:00',
+    };
+    const res = await request(app).post('/api/v1/restaurants').send(restaurant);
+    expect(res.body).toEqual(restaurant);
+    console.log('res.body', res.body);
+  });
 });
