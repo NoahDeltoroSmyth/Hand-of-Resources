@@ -47,6 +47,18 @@ describe('Hand-of-Resources routes', () => {
     const restaurants = await Restaurant.findAll();
     const res = await request(app).get('/api/v1/restaurants');
     expect(res.body).toEqual(restaurants);
+  });
+
+  it('updates a restaurant', async () => {
+    const restaurant = await Restaurant.insert({
+      name: 'Super Taco Express',
+      openAt: '10:00:00',
+      closeAt: '22:00:00',
+    });
+    const res = await request(app)
+      .patch(`/api/v1/restaurants/${restaurant.id}`)
+      .send({ name: 'King Burrito' });
+    expect(res.body).toEqual({ ...restaurant, name: 'King Burrito' });
     console.log('res.body', res.body);
   });
 });
